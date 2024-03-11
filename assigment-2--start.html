@@ -131,23 +131,31 @@
 			//Obtain the index of the current image via Number(document.getElementById('current-index'.value).
 			if (current_index < imageArray.length - 1) {
 				set_main_image(current_index + 1);
+				//When the current image index is smaller than the last index in the image array, call the set_main_image function to update to the next image of the current image.
 			} else {
 				set_main_image(0);
+				//Otherwise, return to the beginning of the image array.
 			}
 		}
 	
 		const set_nav_prev = () => {
 			const current_index = Number(document.getElementById('current-index').value);
+			//the value of the current-index element is stored as a number in the current_index variable.
+			//This value mainly refers to the index of the image currently selected in the image array.
 			if (current_index > 0) {
 				set_main_image (current_index - 1);
+				//If the current image index is greater than 0, call the set_main_image function to update to the previous image of the current image. The current_index -1 represents the previous index of the current image.
 			} else {
 				set_main_image(imageArray.length -1);
+				//Update to the last image in the image array.
 			}
 		}	
 
 		window.addEventListener("load", first_load);
+		//When a web page is loaded, i.e., after all the resources on the page have been fully loaded, we use an event listener to run the first_load function.
 
 		//button
+		//Add event listner for each button, when each button get clicked, It is for finding the HTML element for each button in JavaScript and executing the function that will run when that button is clicked.
 		let first_btn = document.getElementById('first-btn');
 		first_btn.addEventListener('click',set_nav_first);
 
