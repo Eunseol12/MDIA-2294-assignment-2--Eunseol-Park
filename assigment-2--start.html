@@ -50,35 +50,66 @@
 	</div>
     
 	<script>
+		//Make array for images
+		const imageArray = [
+			"cat/laser.png",
+			"cat/no_bother_me.png",
+			"cat/pikaboo.png",
+			"cat/pose.png",
+			"cat/sleepy.png",
+			"cat/weirdo.png",
+			"cat/what_human.png",
+			"cat/yawn_like_a_monster.png"
+		];
 
+
+		// set the initial main image by calling set_main_imgae(0) and generate the thumbnail image by set_thumbnails ()
 		const first_load = () => { 
-			// TODO: set the main image to the first image in the array (index 0)
-			// TODO: set the thumbnail images		
+			set_main_image(0);
+			set_thumbnails();	
 		}
 	
+		//Take a parameter called index and set the main image to the image corresponding to that index.
 		const set_main_image = (index) => {
-			// TODO: set the main-image src image based on the passed parameter	    
-	
-			// TODO: set the hidden textbox to the current index (if you take this approach)	    
-	
-			// update the thumbnails based on the current selection
+			document.getElementById('main-image').src = imageArray[index];
+			//document.getElementById ('main-image').src sets the main image by changing the src properties of elements with main-image IDs in HTML.
+			document.getElementById('current-index').value = index;
+			//document.getElementById('current-index').value) changes the value of a hidden text field with a current-index ID in HTML to save the current index.
+
 			update_thumbnails(index);
+			//Update the thumbnail by calling the update_thumbnails(index) function.
 		}
 	
 		const set_thumbnails = () => {
-			// TODO: declare a variable for the thumbnail strip html (optional)
-	
-			// TODO: loop through the global array and build the html
-			//       - add an onclick handler to each thumbnail to call set_main_image(index)
-	
-			// TODO: add the html to the divThumbArea
-	
+			let thumbnailHTML = "";
+			//Initializes an empty string called thumbnailHTML, which will later contain each thumbnail tag.
+			for (let i = 0; i < imageArray.length; i++) {
+				//leti = 0: Initializes the iterative variable i to 0 in the initialization phase.
+				//i < imageArray.length: In the Condition step, verify that i is less than the length of the imageArray, if true, continue.
+				//i++: Increase i by 1 at the end of each iteration.
+				thumbnailHTML += '<img src="' + imageArray[i] + '" class="clickable-thumbnail" onclick="set_main_image(' + i + ')" width=80 />' ;
+				//Thumbnail: In each iteration, add a new thumbnail image tag to the thumbnailHTML string. The path to the image is designated imageArray[i], and the on-click property is set to invoke the set_main_image(i) function when clicked.
+			}
+			
+			document.getElementById('thumbnail-area'). innerHTML = thumbnailHTML;
+			//After the iteration is complete, set the generated thumbnail HTML to the internal HTML of an HTML element with the ID thumbnail-area.
 		} 
 	
 		const update_thumbnails = (current_index) => {
-			// TODO: you'll need to loop through all thumbnails
-			//		- turn on an indicator (eg opacity:1.0) if it's the selected thumb
-			//		- turn off the indicator (eg opacity:0.75) if it's not
+			
+			const thumbnails = document.querySelector('.clickable-thumnail');
+			//Find all elements within the HTML document whose class is 'clickable' and save them in thumbnails in the form of a NodeList. This NodeList contains thumbnail images.
+
+			thumbnails.forEach((thumbnail, index) => {
+				if (index===current_index) {
+					//Verify type and value the currently traveling thumbnail is the same as the index of the current main image.
+					thumbnail.style.opacity = 1.0;
+					//If the thumbnail corresponds to the current main image, set the thumbnail's transparency to 1.0.
+				} else {
+					thumbnail.style.opacity = 0.5;
+					//Set the transparency of the thumbnail to 0 to make it completely transparent.
+				}
+			})
 		} 
 	
 		const set_nav_first = () => {
