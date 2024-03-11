@@ -113,26 +113,56 @@
 		} 
 	
 		const set_nav_first = () => {
-			// TODO: navigate to the first image (this is the easy one since it's always index zero)
-			
+			// This function sets the main image as the first image.
+			set_main_image(0);
+			//Call set_main_image(0) internally to set the main image as the first image in the array.
 		}
 	
 		const set_nav_last = () => {
-			// TODO: navigate to the last image (should work for any size array)
+			set_main_image(imageArray.length - 1);
+			//The value minus 1 from the length of the array calls the last index of the array to set the main image as the last image of the array.
 		}
 	
 		const set_nav_next = () => {
-			// TODO: move to the next image, unless at the end in which case show the first image
+			
+			const current_index=Number(document.getElementById('current-index').value);
+
+			if (current_index < imageArray.length -1) {
+				set_main_image(current_index +1);
+			} else {
+				set_main_image(0);
+			}
 			
 		}
 	
 		const set_nav_prev = () => {
-			// TODO: move to the previous image, unless at the end in which case show the last image
+			const current_index = Number(document.getElementById('current-index').value);
+
+			if (current_index>0) {
+				set_main_image (current_index -1);
+			}else {
+				set_main_image (imageArray.length -1);
+			}
 		}	
 	
 		window.addEventListener("load", first_load);
 
-	S</script>
+
+		//Button
+
+		let first_btn = document.getElementById('first-btn');
+		first_btn.addEventListener('click', set_nav_first);
+
+		let prev_btn = document.getElementById('prev-btn');
+		prev_btn.addEventListener('click', set_nav_prev);
+		
+
+		let next_btn = document.getElementById('next-btn');
+		next_btn.addEventListener('click', set_nav_next);
+
+		let last_btn = document.getElementById('last-btn');
+		last_btn.addEventListener('clcick', set_nav_last);
+	</script>
 	
 </body>
 </html>
